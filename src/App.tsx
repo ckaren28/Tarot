@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+// import AllCards from './components/AllCards'
+import "./App.css";
+import { MantineProvider, Text } from "@mantine/core";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <div>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <Text>Welcome to Mantine!</Text>
+      </MantineProvider>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a href="/" className="navbar-brand">
+          Home
         </a>
-      </header>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/all-cards"} className="nav-link">
+              All Cards
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/draw"} className="nav-link">
+              Draw One
+            </Link>
+          </li>
+        </div>
+      </nav>
+
+      <div className="container mt-3">
+        <Routes>{/* <Route path="/" element={<AllCards/>} /> */}</Routes>
+      </div>
     </div>
   );
 }
