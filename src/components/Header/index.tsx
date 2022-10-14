@@ -12,9 +12,7 @@ const Header: React.FC = () => {
         <Link to='/all-cards'>
           All Cards
         </Link>
-        <Link to='/game'>
-          Game
-        </Link>
+       
         {/* <Button
           label="Home"
           onClick={() => navigate("/")}

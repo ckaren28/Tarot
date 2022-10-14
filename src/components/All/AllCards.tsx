@@ -1,9 +1,10 @@
 import React from "react";
-import { useQueryClient, useQuery, useMutation } from "react-query";
-import { allCards, client } from "../../pocket/config";
-
+import { useQueryClient, useQuery } from "react-query";
+import { allCards, CardResponse } from '../../pocket/config';
+import { Record } from "pocketbase";
 import { TheList } from "./TheList";
 import { Wrapper, Content, CardImg } from "./AllCards.styles";
+import { any, array } from "prop-types";
 
 
 
@@ -19,7 +20,20 @@ interface AllCardsProps {
 export const AllCards: React.FC<AllCardsProps> = () => {
   // const queryClient = useQueryClient();
 
-  const tarotQuery = useQuery(["tarot_cards"], allCards);
+  const tarotQuery = useQuery(["tarot_cards"], allCards, {
+    // select: (index) => index.length,
+    
+  });
+  // console.log('query:',  tarotQuery)
+  // console.log('data:   ', tarotQuery.data?.length)
+
+  // const shuff = async (data: any) => {
+  //   for (let i:number = shuff?.length -1, i>0, i--){
+  //     const j = Math.floor(Math.random() * (i + 1));            
+  //         [array[i], array[j]] = [array[j], array[i]];   
+  // }}
+  
+  
   // const mutation = useMutation(
   //   ({ data, index }: MutationVars) => {
   //     return client.records.create(index, data);
@@ -45,10 +59,11 @@ export const AllCards: React.FC<AllCardsProps> = () => {
   //   mutation.mutate({ data, index: "tarot_cards" });
   // };
 
+
   return (
     <Wrapper>
       <Content>
-        <TheList list={tarotQuery.data} />
+        <TheList list= {tarotQuery.data} />
       </Content>
     </Wrapper>
   );
