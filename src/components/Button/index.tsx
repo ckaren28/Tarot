@@ -1,7 +1,7 @@
 import React, { Children } from 'react'
 
 
-interface TheButtonProps {
+interface ButtonProps {
   label: string;
   onClick: () => void;
   padding?: string;
@@ -16,7 +16,7 @@ interface TheButtonProps {
   textSize?:string
 }
 
-export const TheButton: React.FC<TheButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
   children,

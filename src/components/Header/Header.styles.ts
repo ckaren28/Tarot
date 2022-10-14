@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   background: var(--darkGrey);
   padding: 0 20px;
-  margin:50px;
   content-align: center;
   border: solid 1px blue;
 `;

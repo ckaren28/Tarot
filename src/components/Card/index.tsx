@@ -1,47 +1,33 @@
-import React from 'react';
-//components
-
-import { CardResponse, IMAGE_BASE_URL, POSTER_SIZE } from "../../pocket/config";
-
-//styles
-import {  Content, Text } from './CardInfo.styles';
+import React from "react";
+import { useQuery } from "react-query";
+import { CardResponse, getCard, IMAGE_BASE_URL } from "../../pocket/config";
+import { useParams } from "react-router";
 import { Record } from "pocketbase";
+import { Content, Wrapper } from "../TarotCardInfo/TarotCardInfo.styles";
 
-interface CardProps {
-    card?: CardResponse[] | Record[];
-  }
-  
-export const CardInfo: React.FC<CardProps> = ({ card }) => (
-    // <Wrapper backdrop={card.img}>
-    <Content>
-        {/* <Thumb image={
-          item.img
-          ? `${IMAGE_BASE_URL}${POSTER_SIZE}${card.img}`
-          : NoImage
-        }
-        clickable={false}
-       alt='item-thumb'
-       /> */}
-      <Text>
-        {/* <h1>{item.name}</h1> */}
-        {/* <h3>ABOUT</h3>
-        <p>{item.overview}</p>
+interface OneCardProps {
+  //   setCurrentCard: string
+  card?: CardResponse | Record;
+}
 
-        <div className='rating-directors'>
-          <div>
-            <h3>RATING</h3>
-            <div className='score'>{item.vote_average}</div>
-          </div>
-          <div className='director'>
-            <h3>DIRECTOR{item.directors.length > 1 ? 'S' : ''}</h3>
-            {item.directors.map(director => (
-              <p key={director.credit_id}>{director.name}</p>
-            ))}
-          </div>
-        </div> */}
+ export const OneCard:  React.FC<OneCardProps> =  ({ card }) => {
+  const { cardId } = useParams();
 
-      </Text>
-    </Content>
-//   </Wrapper>
-);
+  const tarotQuery = useQuery(["tarot_cards", cardId], () => getCard(cardId!));
+  const cardData =  tarotQuery.data;
+  let id = cardData?.id
+  let image = cardData?.img
+  let fullURl = IMAGE_BASE_URL+id+'/'+image
 
+  return (
+    <Wrapper>
+      <Content>
+
+       {cardData?.name}
+       <div>
+              {cardData?.fortune_telling.fortune_telling[0]}
+            </div>
+      </Content>
+    </Wrapper>
+  );
+};

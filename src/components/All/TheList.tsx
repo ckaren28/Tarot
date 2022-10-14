@@ -2,50 +2,49 @@ import React from "react";
 import { CardResponse, IMAGE_BASE_URL } from "../../pocket/config";
 import { Record } from "pocketbase";
 import { Wrapper, Content, CardImg } from "./AllCards.styles";
-
+import { Grid } from "../Grid";
+import { Link } from 'react-router-dom';
+// import {Card} from "../Card";
 
 interface TheListProps {
   list?: CardResponse[] | Record[];
+  random?: CardResponse[] | Record[];
 }
 
-export const TheList: React.FC<TheListProps> = ({ list }) => {
+export const TheList: React.FC<TheListProps> = ({list}) => {
   return (
-    <div className="i">
+    <Grid header="All Cards">
       {list &&
         list.map((item) => {
-          return <OneRow key={item.id} item={item} />;
+          return <SingleCard key={item.id} item={item} />;
         })}
-    </div>
+    </Grid >
   );
 };
 
-interface OneRowProps {
+interface SingleCardProps {
   item: CardResponse | Record;
 }
 
 
-export const OneRow: React.FC<OneRowProps> = ({ item }) => {
+export const SingleCard: React.FC<SingleCardProps> = ({ item }) => {
     let id = item.id
     let image = item.img
     let fullURl = IMAGE_BASE_URL+id+'/'+image
   return (
     <Wrapper>
       <Content>
-
-        <div className="w-full text-lg font-normal text-purple-600">
-          {item.name}
-        </div>
-        <div className="w-full text-lg text-bold">{item.name}</div>
-        <div className="w-full text-base font-normal">
-          {item.fortune_telling.fortune_telling[0]}
-        </div>
-        <div className="w-full text-base font-normal">
+        <Link to={`/${item.id}`} >
           <CardImg
-            src={fullURl}
-            alt={item.name}
-          />
-          {/* {item.img} */}
-        </div>
+                src={fullURl}
+                alt={item.name}
+              />
+        </Link>
+          <h3>{item.name}</h3>
+            <div>
+              {item.fortune_telling.fortune_telling[0]}
+            </div>
+        
       </Content>
     </Wrapper>
   );

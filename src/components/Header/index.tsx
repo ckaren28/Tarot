@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { TheButton } from '../Button'
+import { Button } from '../Button'
 
 import { Wrapper, Content } from './Header.styles';
 
@@ -12,14 +12,17 @@ const Header: React.FC = () => {
         <Link to='/all-cards'>
           All Cards
         </Link>
-        <TheButton
+        <Link to='/game'>
+          Game
+        </Link>
+        {/* <Button
           label="Home"
           onClick={() => navigate("/")}
           radius="5px"
           textSize="1.3rem"
           margin="10px"
           border={"1px  solid"}
-        /> 
+        />  */}
         
       </Content>
     </Wrapper>
